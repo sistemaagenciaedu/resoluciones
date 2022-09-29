@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css footer/footer-mobile.css}">
+    <link rel="stylesheet" th:href="@{/css footer/footer-web.css}">
+    <link rel="stylesheet" href="/static/css footer/footer-mobile.css">
+    <link rel="stylesheet" href="/static/css footer/footer-web.css">
+    <link rel="stylesheet" href="/static/panel.css">
+    <link rel="stylesheet" th:href="@{/panel.css}">
+
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <title>Resoluciones BA</title>
+</head>
+
+<body>
+    <div class="cargar-resolucion-container" id="cargar-resolucion-container">
+        <div class="cargar-resolucion">
+            <h2>Cargar Resolución</h2>
+            <div class="contenedor-fomulario-resolucion">
+
+                <form th:action="@{/admin/resolucion/save}" class="formulario-resolucion" method="post"
+                    th:object="${resolucion}">
+                    <input type="number" name="id" id="id" th:field="*{id}" hidden>
+                    <div class="campos-dobles">
+                        <div class="campos">
+                            <label for="tipoDeAgrupamiento">TIPO DE AGRUPAMIENTO</label>
+                            <select name="tipoDeAgrupamiento" id="tipoDeAgrupamiento" th:field="*{tipoDeAgrupamiento}"
+                                onchange="cargarNominaValores()" required>
+                                <option value="" selected>Seleccione</option>
+                                <!-- <option value="ETP-TS y FP (Inicial y continua)" >ETP-TS y FP (Inicial y continua)</option>
+                                <option value="FPC Socio Humanística" >FPC Socio Humanística</option>
+                                <option value="FPC Artística Específica" >FPC Artística Específica</option>
+                                <option value="Capacitación Laboral" >Capacitación Laboral </option>                                 -->
+                            </select>
+                        </div>
+
+
+                        <div class="campos">
+                            <label for="tipodeGestion">TIPO DE GESTIÓN</label>
+                            <select name="tipodeGestion" id="tipodeGestion" th:field="*{tipodeGestion}" required>
+                                <option value="" selected>Seleccione</option>
+                                <option value="Privada">Privada</option>
+                                <option value="Estatal">Estatal</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="campos-dobles">
+
+                        <div class="campos" id="div-nomina">
+                            <!-- Se carga mediante un JS -->
+                            <label for="nomina">NÓMINA</label>
+                            <select name="seleccione" id="nomina" th:field="*{nomina}">
+                                <option value="" selected>Seleccione</option>
+                            </select>
+                        </div>
+                        <div class="campos">
+                            <label for="tipoDeCertificacion">TITULACIÓN O TIPO DE CERTIFICACIÓN</label>
+                            <input type="text" name="tipoDeCertificacion" id="tipoDeCertificacion"
+                                th:field="*{tipoDeCertificacion}" required>
+
+                        </div>
+                    </div>
+                    <div class="campos-dobles">
+                        <div class="campos"> <label for="denomiCertificacion">DENOMINACION DE LA
+                                CERTIFICACIÓN</label>
+                            <input type="text" name="denomiCertificacion" th:field="*{denomiCertificacion}"
+                                id="denomiCertificacion" required>
+                        </div>
+                        <div class="campos">
+                            <label for="marcoDeReferencia">MARCO DE REFERENCIA</label>
+                            <input type="text" name="marcoDeReferencia" th:field="*{marcoDeReferencia}"
+                                id="marcoDeReferencia" required>
+
+                        </div>
+                        <div class="campos"> <label for="cargaHoraria">CARGA HORARIA</label>
+                            <input type="text" name="cargaHoraria" th:field="*{cargaHoraria}" id="cargaHoraria"
+                                required>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="campos-dobles">
+                        <div class="campos">
+                            <label for="uRLresolucionAprobatoriaDC">RESOLUCIÓN APROBATORIA (URL)</label>
+                            <input type="text" name="uRLresolucionAprobatoriaDC"
+                                th:field="*{uRLresolucionAprobatoriaDC}" id="uRLresolucionAprobatoriaDC" required>
+
+                        </div>
+                        <div class="campos">
+                            <label for="resoluciónValidezNacional">RESOLUCIÓN DE VALIDEZ NACIONAL</label>
+                            <input type="text" name="resoluciónValidezNacional" th:field="*{resolucionValidezNacional}"
+                                id="resoluciónValidezNacional" required>
+
+                        </div>
+                        <div class="campos">
+                            <label for="instituciones">INSTITUCIONES QUE SE DICTA</label>
+                            <input type="text" name="instituciones" id="instituciones" th:field="*{instituciones}"
+                                required>
+                        </div>
+
+                    </div>
+
+                    <div class="campos-dobles">
+                        <div class="campos">
+                            <label for="fechaVencimientoUPlazoDeVigenciaCABA">VENCIMINETO CABA</label>
+                            <input type="date" name="fechaVencimientoUPlazoDeVigenciaCABA"
+                                id="fechaVencimientoUPlazoDeVigenciaCABA"
+                                th:field="*{fechaVencimientoUPlazoDeVigenciaCABA}" required>
+                        </div>
+                        <div class="campos">
+                            <label for="fechaVencimientoUPlazoDeVigenciaNAC">VENCIMINETO NACIONAL</label>
+                            <input type="date" name="fechaVencimientoUPlazoDeVigenciaNAC"
+                                id="fechaVencimientoUPlazoDeVigenciaNAC"
+                                th:field="*{fechaVencimientoUPlazoDeVigenciaNAC}" required>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="campos-botones">
+                        <input class="btn guardar" type="submit" value="GUARDAR">
+                        <label for="cancelar-registro-resolucion" onclick="NoVerCargarResolucion()"
+                            class="btn cancelar">CANCELAR</label>
+
+
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <div class="importar-resolucion-container" id="importar-resolucion-container">
+        <div class="importar-resolucion">
+            <h2>Importar Resoluciones</h2>
+            <form class="importar-formulario" id="form-importar" th:action="@{/admin/import/excel}" method="post"
+                enctype="multipart/form-data">
+                <label for="file">Seleccione el archivo excel a importar</label>
+                <input type="file" class="file" name="file" id="file" accept=".xml,.xlsx">
+                <input class="btn guardar" type="submit" value="IMPORTAR">
+                <label for="" class="btn cancelar" onclick="NoCargarImportarResolucion()">CANCELAR</label>
+            </form>
+        </div>
+    </div>
+    <div class="cargar-user-container" id="cargar-user-container">
+        <div class="user-container">
+            <h2>Agregar Usuario</h2>
+            <form  th:action="@{/admin/guardar-user}" method="post" th:object="${usuario}" id="cargarUSer" class="agregar-user">
+                <div style="display: none;">
+                    <label for="" style="display: none;">id</label>
+                    <input type="text" name="id" id="id"  th:field="*{id}" hidden>
+                </div>
+                <div class="permisos">
+                    <label id="et-clave1" for="clave1">Permisos*</label>
+                    <select name="permisos" id="permisos" th:field="*{permisos}" required>
+                        <option value="" selected>Seleccione</option>
+                        <option value="ROLE_ADMIN">ADMIN</option>
+                        <option value="ROLE_USER">USER</option>
+                    </select>
+                   
+                </div>
+                <div>
+                    <label id="et-nombre" for="nombre">Nombre*</label>
+                    <input type="text" name="nombre" id="nombre" th:field="*{nombre}" onchange="comprobarNombre()" required>
+                </div>
+                <div>
+                    <label id="et-apellido" for="apellido">Apellido*</label>
+                    <input type="text" name="apellido" id="apellido" th:field="*{apellido}" onchange="comprobarApellido()" required>
+                </div>
+                <div>
+                    <label id="et-email1" for="email1">Email*</label>
+                    <input type="email" name="email1" id="email1" th:field="*{email}" required>
+                </div>
+               
+                <div>
+                    <label id="et-clave1" for="clave1">Clave*</label>
+                    <input type="password" name="clave1" id="clave1" th:field="*{clave}" required>
+                </div>
+               
+               
+<div><input type="submit" class="btn guardar" value="GUARDAR"></div>
+<div><label for="" class="btn cancelar" onclick="NoverCargarUser()">CANCELAR</label></div>
+            </form>
+
+        </div>
+
+    </div>
+    <nav class="navbar-index">
+        <!-- este es el java -->
+        <img class="logo-nav" th:src="@{/iconos/logos/logos-nav.webp}" alt="logo agencia de aprendizaje">
+        <!-- este es el chrome -->
+        <!-- <img class="logo-nav" src="/static/iconos/logos/logos-nav.webp" alt="logo agencia de aprendizaje"> -->
+    </nav>
+
+
+
+    <div class="body-visualizador">
+        <div class="barra-control-container">
+            <div class="barra-control">
+                <button class="btn-agragar-formulario" onclick="VerCargarResolucion()"><img class="plus-verde"
+                        th:src="@{/img/iconos-resoluciones-admin/resolucion.webp}" alt="">
+                    <span>Cargar Resolución</span></button>
+                <button class="btn-agragar-formulario" onclick="VerCargarImportarResolucion()"><img class="plus-verde"
+                        th:src="@{/img/iconos-resoluciones-admin/cargamasiva.webp}" alt="">
+                    <span>Importar Resoluciones</span></button>
+
+                <button class="btn-agragar-formulario" onclick="verCargarUser()" sec:authorize="hasRole('ROLE_ADMIN')"><img class="plus-azul"
+                        th:src="@{/img/iconos-resoluciones-admin/user.webp}" alt="">
+                    <span>Agregar Usuarios</span></button>
+                    <button class="btn-agragar-formulario" sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin/listausuarios}"><img class="plus-azul"
+                        th:src="@{/img/iconos-resoluciones-admin/grupo.webp}" alt=""></a>
+                        <span>Lista de Usuarios</span></button>
+                <button class="btn-agragar-formulario"><img class="plus-azul"
+                        th:src="@{/img/iconos-resoluciones-admin/filter.webp}" alt="">
+                    <span>Busqueda por filtros</span></button>
+            </div>
+        </div>
+
+        <div class="listar-resoluciones">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ACCIONES</th>
+                        <th>ID</th>
+                        <th>TIPO DE AGRUPAMIENTO</th>
+                        <th>TIPO DE GESTIÓN</th>
+                        <th>NÓMINA</th>
+                        <th>TITULACIÓN O TIPO DE CERTIFICACIÓN</th>
+                        <th>DENOMINACION DE LA CERTIFICACIÓN</th>
+                        <th>MARCO DE REFERENCIA</th>
+                        <th>CARGA HORARIA</th>
+                        <th>RESOLUCIÓN APROBATORIA (URL)</th>
+                        <th>RESOLUCIÓN DE VALIDEZ NACIONAL</th>
+                        <th>INSTITUCIONES QUE SE DICTA</th>
+                        <th>VENCIMINETO CABA</th>
+                        <th>VENCIMINETO NACIONAL</th>
+
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="reso, it : ${resoluciones2}" th:if="${resoluciones2 != null}">
+                        
+                        <td><a th:href="@{'/admin/eliminar-resolucion?id='+${reso.id}}"><img class="accion-ico" th:src="@{/iconos/iconos-usabilidad/eliminar.webp}" alt=""></a></td>
+                        <td th:text="${reso.id}">ID</td>
+                        <td th:text="${reso.tipoDeAgrupamiento}">TIPO DE AGRUPAMIENTO</td>
+                        <td th:text="${reso.tipodeGestion}">TIPO DE GESTIÓN</td>
+                        <td th:text="${reso.nomina}">NÓMINA</td>
+                        <td th:text="${reso.tipoDeCertificacion}">TITULACIÓN O TIPO DE CERTIFICACIÓN</td>
+                        <td th:text="${reso.denomiCertificacion}">DENOMINACION DE LA CERTIFICACIÓN</td>
+                        <td th:text="${reso.marcoDeReferencia}">MARCO DE REFERENCIA</td>
+                        <td th:text="${reso.cargaHoraria}">CARGA HORARIA</td>
+                        <td><a th:href="${reso.uRLresolucionAprobatoriaDC}"><img class="pdf-ico"
+                                    th:src="@{/iconos/iconos-usabilidad/pdf.webp}"  alt=""></a></td>
+                        <td th:text="${reso.resolucionValidezNacional}">RESOLUCIÓN DE VALIDEZ NACIONAL</td>
+                        <td th:text="${reso.instituciones}">INSTITUCIONES QUE SE DICTA</td>
+                        <td th:text="${reso.fechaVencimientoUPlazoDeVigenciaCABA}">VENCIMINETO CABA</td>
+                        <td th:text="${reso.fechaVencimientoUPlazoDeVigenciaNAC}">VENCIMINETO NACIONAL</td>
+
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+            <p class="parrafo-no-hay" th:if="${#lists.isEmpty(resoluciones2)}">No existen resoluciones cargadas</p>
+        </div>
+
+    </div>
+
+
+
+    <!-- traer todas las resoluciones y agregar un editar o eliminar -->
+
+
+
+    <footer class="footer-mobile">
+        <link rel="stylesheet" href="/css footer/footer-mobile.css">
+        <div class="footer-img-vamosba">
+            <!-- este es el java -->
+            <img th:src="@{/iconos/imagenes footer/ba_vamosba_blanco.webp}" alt="">
+            <!-- este es el Chrome -->
+            <!-- <img src="/static/iconos/imagenes footer/ba_vamosba_blanco.webp" alt=""> -->
+        </div>
+
+        <div class="footer-telefonos-utiles">
+            <p>Teléfonos Utiles</p>
+            <div class="footer-telefonos-utiles-numeros">
+                <div class="footer-tel-item-num"> <a href="tel:102"><span>102</span></a>
+                    <p>Niñez y Adolescencia</p>
+                </div>
+                <div class="footer-tel-item-num"> <a href="tel:103"><span>103</span></a>
+                    <p>Emergencias</p>
+                </div>
+                <div class="footer-tel-item-num"> <a href="tel:107"><span>107</span></a>
+                    <p>SAME</p>
+                </div>
+                <div class="footer-tel-item-num"> <a href="tel:911"><span>911</span></a>
+                    <p>Policía</p>
+                </div>
+                <div class="footer-tel-item-num"> <a href="tel:147"><span>147</span></a>
+                    <p>Atención ciudadana</p>
+                </div>
+                <div class="footer-tel-item-num"> <a href="tel:144"><span>144</span></a>
+                    <p>Violencia de género</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-ver-todos-tel"> <a href="https://www.buenosaires.gob.ar/laciudad/telefonosutiles"><span>Ver
+                    todos los Teléfonos</span></a></div>
+        <div class="footer-redes">
+
+            <p>Redes de la Ciudad</p>
+            <div class="redes-iconos">
+                <a href="https://www.facebook.com/GCBA/"><img src="/iconos/redes/facebook-f-500.png" alt=""></a>
+                <a href="https://twitter.com/gcba"><img src="/iconos/redes/twitter-500.png" alt=""></a>
+                <a href="https://www.instagram.com/buenosaires/"><img src="/iconos/redes/instagram-384.png" alt=""></a>
+                <a href="https://www.youtube.com/user/GCBA"><img src="/iconos/redes/youtube-500.png" alt=""></a>
+            </div>
+        </div>
+        <hr>
+        <div class="footer-legales">
+            <!-- este es el java -->
+            <img th:src="@{/iconos/imagenes footer/ciudad-ba.webp}" alt="">
+            <!-- este es el Chrome -->
+            <!-- <img src="/static/iconos/imagenes footer/ciudad-ba.webp" alt=""> -->
+            <p>Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons Reconocimiento 2.5 Argentina
+                License.</p>
+            <div class="footer-legales-items">
+                <a href="https://boletinoficial.buenosaires.gob.ar/"><span>Boletín Oficial</span></a>
+                <a href="https://www.buenosaires.gob.ar/innovacion/ciudadinteligente/terminos-y-condiciones"><span>Términos
+                        y condiciones</span></a>
+                <a href="https://www.buenosaires.gob.ar/privacidad"><span>Política de Privacidad</span></a>
+                <a href="https://www.buenosaires.gob.ar/oficiosjudiciales"><span>Oficios Judiciales</span></a>
+            </div>
+        </div>
+    </footer>
+    <footer class="footer-web">
+        <script th:src="@{https://code.iconify.design/2/2.2.1/iconify.min.js}"></script>
+        <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+        <div class="contenedor-fot-prin">
+            <div class="fot-sup">
+                <div class="logo-ba-fot">
+                    <a href="http://www.buenosaires.gob.ar/" target="blank">
+                        <!-- este es el java -->
+                        <img th:src="@{/iconos/imagenes footer/ba_vamosba_blanco.webp}"
+                            alt="Logo Vamos Buenos Aires">
+                        <!-- este es el chrome -->
+                        <!-- <img src="/static/iconos/imagenes footer/ba_vamosba_blanco.webp" alt="Logo Vamos Buenos Aires"> -->
+                    </a>
+                </div>
+                <div class="fot-sup-cont">
+                    <div class="fot-cont-sup-titulos">
+                        <div class="fot-cont-titulos">
+                            <p>Teléfonos útiles</p>
+                            <a href="https://www.buenosaires.gob.ar/laciudad/telefonosutiles" target="blank">
+                                <p>Ver todos los teléfonos</p>
+                            </a>
+                        </div>
+                        <div class="fot-cont-tel">
+                            <div>
+                                <a href="tel:102" target="blank"><span>102</span></a>
+                                <p>Niñez y Adolescencia</p>
+                            </div>
+                            <div>
+                                <a href="tel:103" target="blank"><span>103</span></a>
+                                <p>Emergencias</p>
+                            </div>
+                            <div>
+                                <a href="tel:107" target="blank"><span>107</span></a>
+                                <p>SAME</p>
+                            </div>
+                            <div>
+                                <a href="tel:911" target="blank"><span>911</span></a>
+                                <p>Policía</p>
+                            </div>
+                            <div>
+                                <a href="tel:147" target="blank"><span>147</span></a>
+                                <p>Atención ciudadana</p>
+                            </div>
+                            <div>
+                                <a href="tel:144" target="blank"><span>144</span></a>
+                                <p>Violencia de género</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="fot-cont-inf">
+                        <div class="fot-cont-inf-titulos-redes">
+                            <p>Redes de la Ciudad</p>
+                        </div>
+                        <div class="fot-cont-inf-redes">
+                            <a href="https://www.facebook.com/GCBA/" target="blank">
+                                <i class="iconify" id="face" data-icon="gg:facebook"
+                                    style="color: white; width: 25px;height: 25px;"></i>
+                            </a>
+                            <a href="https://twitter.com/gcba" target="blank">
+                                <i class="iconify" data-icon="ant-design:twitter-outlined"
+                                    style="color: white;width: 25px;height: 25px;"></i>
+                            </a>
+                            <a href="https://www.instagram.com/buenosaires/" target="blank">
+                                <i class="iconify" data-icon="bi:instagram"
+                                    style="color: white;width: 25px;height: 25px;"></i>
+                            </a>
+                            <a href="https://www.youtube.com/user/GCBA" target="blank">
+                                <i class="iconify" data-icon="fa:youtube"
+                                    style="color: white;width: 25px;height: 25px;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fot-inf">
+                <div class="fot-inf-div-logo">
+                    <a href="http://www.buenosaires.gob.ar/" target="blank">
+                        <!-- este es el java  -->
+                        <img th:src="@{/iconos/imagenes footer/ciudad-ba.webp}" class="logofo"
+                            alt="Logo Buenos Aires Ciudad">
+                        <!-- este es el chrome -->
+                        <!-- <img src="/static/iconos/imagenes footer/ciudad-ba.webp" class="logofo"
+                            alt="Logo Buenos Aires Ciudad"> -->
+                    </a>
+                    <p>Los contenidos de buenosaires.gob.ar están licenciados bajo Creative Commons Reconocimiento
+                        2.5
+                        Argentina License.</p>
+                </div>
+                <div class="fot-inf-div-contenido-iz">
+                    <a href="https://boletinoficial.buenosaires.gob.ar/" target="blank"><span>Boletín
+                            Oficial</span></a>
+                    <a href="https://www.buenosaires.gob.ar/innovacion/ciudadinteligente/terminos-y-condiciones"
+                        target="blank"><span>Términos y condiciones</span></a>
+                    <a href="https://www.buenosaires.gob.ar/privacidad" target="blank"><span>Política de
+                            Privacidad</span></a>
+                    <a href="https://www.buenosaires.gob.ar/oficiosjudiciales" target="blank"><span>Oficios
+                            judiciales</span></a>
+                    <form th:action="@{/logout}" method="POST" style="display: none;">
+                        <input type="submit" value="salir" id="salir-form">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script th:src="@{/js/nomina.js}"></script>
+
+    <script th:src="@{/js/panel.js}"></script>
+    <script src="/static/js/panel.js"></script>
+    <script src="/static/js/nomina.js"></script>
+
+
+
+</body>
+
+</html>

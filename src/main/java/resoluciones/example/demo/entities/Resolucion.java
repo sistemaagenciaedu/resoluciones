@@ -12,36 +12,44 @@ public class Resolucion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String ambitoDeDaETP;
-    private String familiaProfesional;
+    private String tipoDeAgrupamiento;
+    private String tipodeGestion;
+
+    private String nomina;
     private String tipoDeCertificacion;
-    private String DenomiCertificación;
+    private String denomiCertificacion;
     private String marcoDeReferencia;
-    private String resolucionAprobatoriaDC;
+    private String uRLresolucionAprobatoriaDC;
+    private String resolucionValidezNacional;
+
+    private String instituciones;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date fechaVencimiento;
-    private String resoluciónValidezNacional;
-    private String cargaHoracia;
-    private String Instituciones;
-    private String tipodeGestión;
+    private Date fechaVencimientoUPlazoDeVigenciaCABA;
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date fechaVencimientoUPlazoDeVigenciaNAC;
+    private String cargaHoraria;
+
+
 
     public Resolucion() {
     }
 
-    public Resolucion(Long id, String ambitoDeDaETP, String familiaProfesional, String tipoDeCertificacion, String denomiCertificación, String marcoDeReferencia, String resolucionAprobatoriaDC, Date fechaVencimiento, String resoluciónValidezNacional, String cargaHoracia, String instituciones, String tipodeGestión) {
+    public Resolucion(Long id, String tipoDeAgrupamiento, String tipodeGestion, String nomina, String tipoDeCertificacion, String denomiCertificacion, String marcoDeReferencia, String uRLresolucionAprobatoriaDC, String resolucionValidezNacional, String instituciones, Date fechaVencimientoUPlazoDeVigenciaCABA, Date fechaVencimientoUPlazoDeVigenciaNAC, String cargaHoraria) {
         this.id = id;
-        this.ambitoDeDaETP = ambitoDeDaETP;
-        this.familiaProfesional = familiaProfesional;
+        this.tipoDeAgrupamiento = tipoDeAgrupamiento;
+        this.tipodeGestion = tipodeGestion;
+        this.nomina = nomina;
         this.tipoDeCertificacion = tipoDeCertificacion;
-        DenomiCertificación = denomiCertificación;
+        this.denomiCertificacion = denomiCertificacion;
         this.marcoDeReferencia = marcoDeReferencia;
-        this.resolucionAprobatoriaDC = resolucionAprobatoriaDC;
-        this.fechaVencimiento = fechaVencimiento;
-        this.resoluciónValidezNacional = resoluciónValidezNacional;
-        this.cargaHoracia = cargaHoracia;
-        Instituciones = instituciones;
-        this.tipodeGestión = tipodeGestión;
+        this.uRLresolucionAprobatoriaDC = uRLresolucionAprobatoriaDC;
+        this.resolucionValidezNacional = resolucionValidezNacional;
+        this.instituciones = instituciones;
+        this.fechaVencimientoUPlazoDeVigenciaCABA = fechaVencimientoUPlazoDeVigenciaCABA;
+        this.fechaVencimientoUPlazoDeVigenciaNAC = fechaVencimientoUPlazoDeVigenciaNAC;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public Long getId() {
@@ -52,20 +60,28 @@ public class Resolucion {
         this.id = id;
     }
 
-    public String getAmbitoDeDaETP() {
-        return ambitoDeDaETP;
+    public String getTipoDeAgrupamiento() {
+        return tipoDeAgrupamiento;
     }
 
-    public void setAmbitoDeDaETP(String ambitoDeDaETP) {
-        this.ambitoDeDaETP = ambitoDeDaETP;
+    public void setTipoDeAgrupamiento(String tipoDeAgrupamiento) {
+        this.tipoDeAgrupamiento = tipoDeAgrupamiento;
     }
 
-    public String getFamiliaProfesional() {
-        return familiaProfesional;
+    public String getTipodeGestion() {
+        return tipodeGestion;
     }
 
-    public void setFamiliaProfesional(String familiaProfesional) {
-        this.familiaProfesional = familiaProfesional;
+    public void setTipodeGestion(String tipodeGestion) {
+        this.tipodeGestion = tipodeGestion;
+    }
+
+    public String getNomina() {
+        return nomina;
+    }
+
+    public void setNomina(String nomina) {
+        this.nomina = nomina;
     }
 
     public String getTipoDeCertificacion() {
@@ -76,12 +92,12 @@ public class Resolucion {
         this.tipoDeCertificacion = tipoDeCertificacion;
     }
 
-    public String getDenomiCertificación() {
-        return DenomiCertificación;
+    public String getDenomiCertificacion() {
+        return denomiCertificacion;
     }
 
-    public void setDenomiCertificación(String denomiCertificación) {
-        DenomiCertificación = denomiCertificación;
+    public void setDenomiCertificacion(String denomiCertificacion) {
+        this.denomiCertificacion = denomiCertificacion;
     }
 
     public String getMarcoDeReferencia() {
@@ -92,51 +108,51 @@ public class Resolucion {
         this.marcoDeReferencia = marcoDeReferencia;
     }
 
-    public String getResolucionAprobatoriaDC() {
-        return resolucionAprobatoriaDC;
+    public String getuRLresolucionAprobatoriaDC() {
+        return uRLresolucionAprobatoriaDC;
     }
 
-    public void setResolucionAprobatoriaDC(String resolucionAprobatoriaDC) {
-        this.resolucionAprobatoriaDC = resolucionAprobatoriaDC;
+    public void setuRLresolucionAprobatoriaDC(String uRLresolucionAprobatoriaDC) {
+        this.uRLresolucionAprobatoriaDC = uRLresolucionAprobatoriaDC;
     }
 
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
+    public String getResolucionValidezNacional() {
+        return resolucionValidezNacional;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public String getResoluciónValidezNacional() {
-        return resoluciónValidezNacional;
-    }
-
-    public void setResoluciónValidezNacional(String resoluciónValidezNacional) {
-        this.resoluciónValidezNacional = resoluciónValidezNacional;
-    }
-
-    public String getCargaHoracia() {
-        return cargaHoracia;
-    }
-
-    public void setCargaHoracia(String cargaHoracia) {
-        this.cargaHoracia = cargaHoracia;
+    public void setResolucionValidezNacional(String resolucionValidezNacional) {
+        this.resolucionValidezNacional = resolucionValidezNacional;
     }
 
     public String getInstituciones() {
-        return Instituciones;
+        return instituciones;
     }
 
     public void setInstituciones(String instituciones) {
-        Instituciones = instituciones;
+        this.instituciones = instituciones;
     }
 
-    public String getTipodeGestión() {
-        return tipodeGestión;
+    public Date getFechaVencimientoUPlazoDeVigenciaCABA() {
+        return fechaVencimientoUPlazoDeVigenciaCABA;
     }
 
-    public void setTipodeGestión(String tipodeGestión) {
-        this.tipodeGestión = tipodeGestión;
+    public void setFechaVencimientoUPlazoDeVigenciaCABA(Date fechaVencimientoUPlazoDeVigenciaCABA) {
+        this.fechaVencimientoUPlazoDeVigenciaCABA = fechaVencimientoUPlazoDeVigenciaCABA;
+    }
+
+    public Date getFechaVencimientoUPlazoDeVigenciaNAC() {
+        return fechaVencimientoUPlazoDeVigenciaNAC;
+    }
+
+    public void setFechaVencimientoUPlazoDeVigenciaNAC(Date fechaVencimientoUPlazoDeVigenciaNAC) {
+        this.fechaVencimientoUPlazoDeVigenciaNAC = fechaVencimientoUPlazoDeVigenciaNAC;
+    }
+
+    public String getCargaHoraria() {
+        return cargaHoraria;
+    }
+
+    public void setCargaHoraria(String cargaHoraria) {
+        this.cargaHoraria = cargaHoraria;
     }
 }

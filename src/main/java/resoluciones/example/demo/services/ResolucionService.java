@@ -11,5 +11,5 @@ public interface ResolucionService {
     public void deleteResolucionById(Long id);
     public Resolucion findResolucion(Resolucion resolucion);
     public Resolucion findResolucionById(Long id);
-
+    public List<Resolucion> getByFilter(String query,String order);
 }
